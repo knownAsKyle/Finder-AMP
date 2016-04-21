@@ -25,7 +25,7 @@ var _Searcher_ = _Searcher_ || {};
     function handleSearchType(e) {
         clearTimeout(beginSearch);
         if (e.target.value && e.target.value !== "" && e.target.value.length > 0) {
-        	resultsWrapper.innerText = "Searching ...";
+            resultsWrapper.innerText = "Searching ...";
             beginSearch = setTimeout(activateSearch, 1500);
         } else {
             resultsWrapper.innerText = "";
@@ -67,13 +67,13 @@ var _Searcher_ = _Searcher_ || {};
 
     function buildResults(data) {
         resultsWrapper.innerText = "";
-        var items = data && data.findItemsByKeywordsResponse && data.findItemsByKeywordsResponse[0].searchResult && data.findItemsByKeywordsResponse[0].searchResult[0].item?data.findItemsByKeywordsResponse[0].searchResult[0].item:null;
+        var items = data && data.findItemsByKeywordsResponse && data.findItemsByKeywordsResponse[0].searchResult && data.findItemsByKeywordsResponse[0].searchResult[0].item ? data.findItemsByKeywordsResponse[0].searchResult[0].item : null;
         if (items) {
             for (var i = 0, len = items.length; i < len; i++) {
                 resultsWrapper.appendChild(_Searcher_.buildDisplayListItem(items[i]));
             }
         } else {
-            resultsWrapper.innerText = "No results!"
+            resultsWrapper.innerText = "No results!";
         }
     }
 
