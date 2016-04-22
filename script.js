@@ -40,7 +40,7 @@ var _Searcher_ = _Searcher_ || {};
         if (e.target.value && e.target.value !== "" && e.target.value.length > 0) {
             resultsWrapper.innerText = "Searching ...";
             if (_Searcher_.elements.ebayCheckbox.checked) {
-                beginEbaySearch = setTimeout(_Searcher_.activateEbaySearch, 1000, e.target.value);
+                beginEbaySearch = setTimeout(_Searcher_.activateEbaySearch, 50, e.target.value);
             }
         } else {
             resultsWrapper.innerText = "";
@@ -127,10 +127,11 @@ var _Searcher_ = _Searcher_ || {};
 
     function formatEbayData(data) {
         var obj = {};
-        obj.price = data.sellingStatus[0].sellingState[0] === "Active" ? data.sellingStatus[0].currentPrice[0].__value__ : "SOLD";
-        obj.link = data.viewItemURL[0];
-        obj.image = data.galleryURL[0];
-        obj.title = data.title[0];
+        var status = data.sellingStatus && data.sellingStatus[0] && data.sellingStatus[0].sellingState ? data.sellingStatus[0].sellingState[0] : "";
+        obj.price = status === "Active" ? data.sellingStatus[0].currentPrice[0].__value__ : "SOLD";
+        obj.link = data.viewItemURL ? data.viewItemURL[0] : "";
+        obj.image = data.galleryURL ? data.galleryURL[0] : "";
+        obj.title = data.title ? data.title[0] : "";
         return obj;
     }
 })();
