@@ -1,5 +1,5 @@
 var _Searcher_ = _Searcher_ || {};
-(function() {
+(function pageElements() {
     _Searcher_.elements = {};
     _Searcher_.elements.inputSearch = document.getElementById("input-search");
     _Searcher_.elements.resultsWrapper = document.getElementById("results-wrapper");
@@ -11,7 +11,7 @@ var _Searcher_ = _Searcher_ || {};
     _Searcher_.elements.amazonCheckbox = document.getElementById("amazon-checkbox");
     _Searcher_.elements.etsyCheckbox = document.getElementById("etsy-checkbox");
 })();
-(function() {
+(function constants() {
     _Searcher_.consts = {};
     _Searcher_.consts.ebay = {};
     _Searcher_.consts.ebay.KEYWORDS = "findItemsByKeywords";
@@ -28,7 +28,7 @@ var _Searcher_ = _Searcher_ || {};
     _Searcher_.consts.ebay.keyWordStarter = "&keywords=";
     _Searcher_.consts.ebay.pagination = "&paginationInput.entriesPerPage=";
 })();
-(function() {
+(function searchInputHandler() {
     var search = _Searcher_.elements.inputSearch;
     var resultsWrapper = _Searcher_.elements.resultsWrapper;
     search.disabled = false;
@@ -48,7 +48,7 @@ var _Searcher_ = _Searcher_ || {};
     }
 })();
 (function ebaySeach() {
-    _Searcher_.ebaySearchResults = [];
+    //Build Url for ebay search - also add/removes script as needed
     _Searcher_.activateEbaySearch = activateEbaySearch;
     _Searcher_._cb_findItemsByKeywords = ebayKeyWordSearch;
     var resultsWrapper = _Searcher_.elements.resultsWrapper;
@@ -103,6 +103,7 @@ var _Searcher_ = _Searcher_ || {};
 (function addEbayData() {
     _Searcher_.buildDisplayListItem = buildDisplayListItem;
 
+    //Create listing
     function buildDisplayListItem(data) {
         data = formatEbayData(data);
         var wrapper = document.createElement("div");
@@ -125,6 +126,7 @@ var _Searcher_ = _Searcher_ || {};
         return wrapper;
     }
 
+    //DAO
     function formatEbayData(data) {
         var obj = {};
         var status = data.sellingStatus && data.sellingStatus[0] && data.sellingStatus[0].sellingState ? data.sellingStatus[0].sellingState[0] : "";
